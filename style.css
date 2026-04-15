@@ -1,0 +1,247 @@
+/* ===== 基础重置 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #050a14;
+    font-family: 'SimSun', 'STSong', serif;
+    color: #c0d8f0;
+    cursor: none;
+}
+
+/* ===== 背景图片层 ===== */
+.bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('李白.webp') no-repeat center center;
+    background-size: cover;
+    z-index: 0;
+    animation: bgZoom 30s ease-in-out infinite alternate;
+}
+
+@keyframes bgZoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+
+/* ===== 暗色遮罩 ===== */
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(5, 10, 25, 0.3) 0%,
+        rgba(5, 10, 25, 0.15) 30%,
+        rgba(5, 10, 25, 0.2) 60%,
+        rgba(5, 10, 25, 0.6) 100%
+    );
+    z-index: 1;
+}
+
+/* ===== 动态环境光 ===== */
+.ambient-light {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 70% 30%, rgba(100, 160, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 30% 70%, rgba(120, 100, 200, 0.06) 0%, transparent 50%);
+    animation: ambientShift 12s ease-in-out infinite alternate;
+}
+
+@keyframes ambientShift {
+    0% {
+        background:
+            radial-gradient(ellipse at 70% 30%, rgba(100, 160, 255, 0.08) 0%, transparent 50%),
+            radial-gradient(ellipse at 30% 70%, rgba(120, 100, 200, 0.06) 0%, transparent 50%);
+    }
+    100% {
+        background:
+            radial-gradient(ellipse at 60% 40%, rgba(140, 120, 220, 0.1) 0%, transparent 50%),
+            radial-gradient(ellipse at 40% 60%, rgba(80, 180, 240, 0.08) 0%, transparent 50%);
+    }
+}
+
+/* ===== 粒子画布 ===== */
+#particleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* ===== 剑气特效 ===== */
+.sword-slash {
+    position: fixed;
+    z-index: 4;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.slash-1 {
+    top: 25%;
+    left: 5%;
+    width: 350px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(180, 220, 255, 0.9), rgba(100, 180, 255, 0.7), transparent);
+    transform: rotate(-20deg);
+    animation: slashAnim1 7s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(140, 200, 255, 0.6), 0 0 40px rgba(100, 160, 255, 0.3);
+}
+
+.slash-2 {
+    top: 55%;
+    right: 0%;
+    width: 280px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(200, 180, 255, 0.8), rgba(160, 140, 255, 0.6), transparent);
+    transform: rotate(30deg);
+    animation: slashAnim2 9s ease-in-out infinite 2.5s;
+    box-shadow: 0 0 15px rgba(170, 150, 255, 0.5), 0 0 30px rgba(140, 120, 255, 0.2);
+}
+
+.slash-3 {
+    top: 70%;
+    left: 20%;
+    width: 400px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(150, 220, 255, 0.7), rgba(100, 200, 240, 0.5), transparent);
+    transform: rotate(-10deg);
+    animation: slashAnim3 11s ease-in-out infinite 5s;
+    box-shadow: 0 0 12px rgba(130, 210, 250, 0.4), 0 0 25px rgba(100, 190, 240, 0.2);
+}
+
+@keyframes slashAnim1 {
+    0%, 100% { opacity: 0; transform: rotate(-20deg) translateX(-60px); }
+    15% { opacity: 1; transform: rotate(-20deg) translateX(20px); }
+    30% { opacity: 0.3; transform: rotate(-20deg) translateX(80px); }
+    40% { opacity: 0; transform: rotate(-20deg) translateX(120px); }
+}
+
+@keyframes slashAnim2 {
+    0%, 100% { opacity: 0; transform: rotate(30deg) translateX(60px); }
+    20% { opacity: 0.9; transform: rotate(30deg) translateX(-10px); }
+    35% { opacity: 0.2; transform: rotate(30deg) translateX(-60px); }
+    45% { opacity: 0; transform: rotate(30deg) translateX(-100px); }
+}
+
+@keyframes slashAnim3 {
+    0%, 100% { opacity: 0; transform: rotate(-10deg) translateX(-50px); }
+    12% { opacity: 0.8; transform: rotate(-10deg) translateX(30px); }
+    28% { opacity: 0.2; transform: rotate(-10deg) translateX(100px); }
+    38% { opacity: 0; transform: rotate(-10deg) translateX(160px); }
+}
+
+/* ===== 左上角文字 ===== */
+.top-left-info {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.info-text {
+    font-size: 30px;
+    color: #ffd700;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2);
+}
+
+.info-link {
+    font-size: 25px;
+    color: #ffd700;
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2);
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.info-link:hover {
+    color: #ffe44d;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.6), 0 0 50px rgba(255, 215, 0, 0.3);
+}
+
+/* ===== 中心文字 ===== */
+.center-text {
+    position: fixed;
+    bottom: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+    user-select: none;
+}
+
+.title {
+    font-size: 58px;
+    font-weight: 700;
+    letter-spacing: 14px;
+    background: linear-gradient(135deg, #a0c4ff 0%, #e0e8ff 25%, #c8b8ff 50%, #80d0ff 75%, #a0c4ff 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleShimmer 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 25px rgba(140, 180, 255, 0.4));
+    margin-bottom: 10px;
+}
+
+@keyframes titleShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.subtitle {
+    font-size: 18px;
+    letter-spacing: 8px;
+    color: rgba(180, 210, 240, 0.75);
+    margin-bottom: 20px;
+}
+
+.divider {
+    width: 100px;
+    height: 1px;
+    margin: 0 auto 16px;
+    background: linear-gradient(90deg, transparent, rgba(160, 200, 255, 0.7), transparent);
+    animation: dividerGlow 3s ease-in-out infinite;
+}
+
+@keyframes dividerGlow {
+    0%, 100% { opacity: 0.5; width: 100px; }
+    50% { opacity: 1; width: 140px; }
+}
+
+.quote {
+    font-size: 15px;
+    letter-spacing: 4px;
+    color: rgba(200, 220, 240, 0.55);
+    font-style: italic;
+    animation: quoteFade 5s ease-in-out infinite;
+}
+
+@keyframes quoteFade {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.85; }
+}
