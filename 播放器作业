@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>播放器图标作业</title>
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #5a3b6b, #c99bc9, #5a3b6b);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .icon-box {
+            width: 280px;
+            height: 280px;
+            background: linear-gradient(135deg, #9a5b8b, #6a3b6b);
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+        }
+
+        .screen-box {
+            width: 200px;
+            height: 160px;
+            background: #2b1b2b;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .screen-inner {
+            width: 160px;
+            height: 120px;
+            background: linear-gradient(135deg, #f9b898, #a85b7b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .play-circle {
+            width: 80px;
+            height: 80px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .play-triangle {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 18px 0 18px 30px;
+            border-color: transparent transparent transparent #2b1b2b;
+        }
+    </style>
+</head>
+<body>
+    <div class="icon-box">
+        <div class="screen-box">
+            <div class="screen-inner">
+                <div class="play-circle">
+                    <div class="play-triangle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
