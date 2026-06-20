@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>个人方案与定价 · TRAE</title>
+    <style>
+      :root {
+        --bei-jing: #070808;
+        --mian-ban: #141414;
+        --mian-ban-xian: #2a2a2a;
+        --wen-ben: #f5f5f5;
+        --mo-ren: #8a8f8b;
+        --lv: #16d672;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: var(--bei-jing);
+        color: var(--wen-ben);
+        font-family:
+          "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        padding-top: 54px;
+        min-height: 100vh;
+      }
+      .dao-hang {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 54px;
+        padding: 0 22px;
+        background: rgba(7, 8, 8, 0.72);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .dao-hang-zuo {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+      }
+      .logo {
+        font-weight: 800;
+        font-size: 18px;
+        letter-spacing: 1px;
+        padding: 2px 7px;
+        border-radius: 4px;
+        line-height: 1;
+        border: none;
+      }
+      .cai-dan {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+      }
+      .cai-dan a,
+      .cai-dan-xiang {
+        color: var(--wen-ben);
+        font-size: 13.5px;
+        text-decoration: none;
+        cursor: pointer;
+        opacity: 0.9;
+        white-space: nowrap;
+      }
+      .cai-dan-xiang {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .xia-la-jian-tou {
+        display: none;
+      }
+      .dao-hang-you {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .deng-lu {
+        color: var(--wen-ben);
+        font-size: 13.5px;
+        text-decoration: none;
+        opacity: 0.9;
+      }
+      .an-niu-lv {
+        background: var(--lv);
+        color: #06210f;
+        font-size: 13.5px;
+        font-weight: 600;
+        padding: 7px 16px;
+        border-radius: 7px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: filter 0.15s;
+      }
+      .an-niu-lv:hover {
+        filter: brightness(1.08);
+      }
+      .xia-la-cai-dan {
+        position: absolute;
+        top: 30px;
+        left: -12px;
+        width: 248px;
+        background: var(--mian-ban);
+        border: 1px solid var(--mian-ban-xian);
+        border-radius: 12px;
+        padding: 8px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-6px);
+        transition: 0.18s ease;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+      }
+      .cai-dan-xiang:hover .xia-la-cai-dan {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      .xia-la-xiang {
+        display: flex;
+        gap: 11px;
+        padding: 9px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .xia-la-xiang:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .xia-la-tu-biao {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        background: #222;
+        border: 1px solid #313131;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #cfcfcf;
+      }
+      .xia-la-wen-zi {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .xia-la-biao-ti {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: var(--wen-ben);
+      }
+      .xin-biao-qian {
+        font-size: 9px;
+        font-weight: 700;
+        color: var(--lv);
+        border: 1px solid rgba(22, 214, 114, 0.5);
+        border-radius: 4px;
+        padding: 1px 4px;
+      }
+      .xia-la-fu-biao-ti {
+        font-size: 11.5px;
+        color: var(--mo-ren);
+      }
+      .ye-biao-tou {
+        text-align: center;
+        padding: 60px 20px 14px;
+      }
+      .ye-biao-tou h1 {
+        font-size: 46px;
+        font-weight: 800;
+        letter-spacing: 3px;
+        background: linear-gradient(
+          100deg,
+          #ffffff 0%,
+          #9ff0c8 45%,
+          #16d672 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+      }
+      .ye-biao-tou .fu-biao-ti {
+        margin-top: 16px;
+        font-size: 14px;
+        color: var(--mo-ren);
+      }
+      .ye-biao-tou .fu-biao-ti .jian-tou {
+        color: var(--lv);
+      }
+      .ding-jia-wai-kuang {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 30px 22px 80px;
+      }
+      .ding-jia-lie-biao {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .ding-jia-xiang {
+        flex: 1 1 0;
+        min-width: 220px;
+        display: flex;
+        flex-direction: column;
+        background: var(--mian-ban);
+        border: 1px solid #262626;
+        border-radius: 14px;
+        padding: 22px 20px;
+        transition:
+          border-color 0.18s,
+          background 0.18s;
+      }
+      .ding-jia-xiang:hover {
+        border: 1.5px solid var(--lv);
+        background: #0f1a14;
+        box-shadow: 0 0 0 1px rgba(22, 214, 114, 0.15);
+      }
+      .ding-jia-xiang-tou {
+        margin-bottom: 18px;
+      }
+      .ding-jia-ming-cheng {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--lv);
+      }
+      .biao-qian {
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--lv);
+        background: rgba(22, 214, 114, 0.12);
+        border: 1px solid rgba(22, 214, 114, 0.4);
+        border-radius: 4px;
+        padding: 2px 6px;
+        margin-left: 8px;
+      }
+      .biao-qian.hui {
+        color: #d8b15a;
+        background: rgba(216, 177, 90, 0.1);
+        border-color: rgba(216, 177, 90, 0.4);
+      }
+      .jia-ge {
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+        margin-bottom: 22px;
+        flex-wrap: wrap;
+      }
+      .jia-ge .qian-zhui {
+        font-size: 12px;
+        color: var(--mo-ren);
+      }
+      .jia-ge .shu-zi {
+        font-size: 34px;
+        font-weight: 800;
+      }
+      .jia-ge .mei-yue {
+        font-size: 13px;
+        color: var(--mo-ren);
+      }
+      .jia-ge .yuan-jia {
+        font-size: 13px;
+        color: #5f635f;
+        text-decoration: line-through;
+        margin-left: 6px;
+      }
+      .gong-neng {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        flex: 1;
+        margin-bottom: 24px;
+      }
+      .gong-neng .gong-neng-xiang {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 12.5px;
+        color: #cfd2cf;
+      }
+      .gong-neng .gong-neng-xiang svg {
+        flex: none;
+        color: var(--lv);
+      }
+      .ding-jia-an-niu {
+        width: 100%;
+        text-align: center;
+        padding: 11px 0;
+        border-radius: 9px;
+        font-size: 14px;
+        font-weight: 600;
+        border: 1px solid #3a3a3a;
+        background: #1e1e1e;
+        color: var(--wen-ben);
+        text-decoration: none;
+        display: block;
+        transition: 0.15s;
+      }
+      .ding-jia-an-niu:hover,
+      .ding-jia-xiang:hover .ding-jia-an-niu {
+        background: var(--lv);
+        color: #06210f;
+        border: none;
+      }
+      .ding-jia-kuan {
+        flex: 1 1 100%;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        flex-wrap: wrap;
+        background: var(--mian-ban);
+        border: 1px solid #262626;
+        border-radius: 14px;
+        padding: 22px 26px;
+        margin-top: 16px;
+        transition:
+          border-color 0.18s,
+          background 0.18s;
+      }
+      .ding-jia-kuan:hover {
+        border: 1.5px solid var(--lv);
+        background: #0f1a14;
+      }
+      .ding-jia-kuan .zuo {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-width: 200px;
+      }
+      .ding-jia-kuan .gong-neng {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px 26px;
+        margin: 0;
+        flex: 1;
+      }
+      .ding-jia-kuan .ding-jia-an-niu {
+        width: auto;
+        padding: 11px 34px;
+      }
+      @media (max-width: 880px) {
+        .cai-dan {
+          display: none;
+        }
+        .ding-jia-xiang {
+          flex: 1 1 calc(50% - 8px);
+        }
+        .ye-biao-tou h1 {
+          font-size: 32px;
+        }
+        .ding-jia-kuan {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+      @media (max-width: 520px) {
+        .ding-jia-xiang {
+          flex: 1 1 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="dao-hang">
+      <div class="dao-hang-zuo">
+        <div class="logo">TRAE</div>
+        <nav class="cai-dan">
+          <div class="cai-dan-xiang">
+            产品 <span class="xia-la-jian-tou">▾</span>
+            <div class="xia-la-cai-dan">
+              <div class="xia-la-xiang">
+                <div class="xia-la-tu-biao">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect x="3" y="4" width="18" height="14" rx="2" />
+                    <path d="M8 20h8" />
+                  </svg>
+                </div>
+                <div class="xia-la-wen-zi">
+                  <div class="xia-la-biao-ti">
+                    TRAE Work <span class="xin-biao-qian">NEW</span>
+                  </div>
+                  <div class="xia-la-fu-biao-ti">AI 工作助手</div>
+                </div>
+              </div>
+              <div class="xia-la-xiang">
+                <div class="xia-la-tu-biao">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13 6l-2 12" />
+                  </svg>
+                </div>
+                <div class="xia-la-wen-zi">
+                  <div class="xia-la-biao-ti">TRAE IDE</div>
+                  <div class="xia-la-fu-biao-ti">AI 原生 IDE</div>
+                </div>
+              </div>
+              <div class="xia-la-xiang">
+                <div class="xia-la-tu-biao">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M11 4H6a2 2 0 00-2 2v5m0 4v3a2 2 0 002 2h12a2 2 0 002-2v-7"
+                    />
+                    <rect x="13" y="2" width="8" height="8" rx="1.5" />
+                  </svg>
+                </div>
+                <div class="xia-la-wen-zi">
+                  <div class="xia-la-biao-ti">TRAE 插件</div>
+                  <div class="xia-la-fu-biao-ti">AI 编程助手</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a href="#">企业版</a>
+          <a href="./定价.html">定价</a>
+          <a href="#">文档</a>
+          <a href="./更新日志.html">更新日志</a>
+          <a href="#">社区</a>
+          <a href="#">知识库</a>
+        </nav>
+      </div>
+      <div class="dao-hang-you">
+        <a href="#" class="deng-lu">登录</a>
+        <a href="#" class="an-niu-lv">下载中心</a>
+      </div>
+    </header>
+    <section class="ye-biao-tou">
+      <h1>个人方案与定价</h1>
+      <div class="fu-biao-ti">
+        企业版选型与咨询，前往火山引擎 <span class="jian-tou">↗</span>
+      </div>
+    </section>
+    <div class="ding-jia-wai-kuang">
+      <div class="ding-jia-lie-biao">
+        <div class="ding-jia-xiang">
+          <div class="ding-jia-xiang-tou">
+            <span class="ding-jia-ming-cheng">免费</span>
+          </div>
+          <div class="jia-ge"><span class="shu-zi">¥0</span></div>
+          <div class="gong-neng">
+            <div class="gong-neng-xiang">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+              >
+                <path d="M20 6L9 17l-5-5" /></svg
+              >所有功能均可免费使用
+            </div>
+            <div class="gong-neng-xiang">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+              >
+                <path d="M20 6L9 17l-5-5" /></svg
+              >支持 2 个云端任务同时并行
+            </div>
+          </div>
+          <a href="#" class="ding-jia-an-niu">免费使用</a>
+        </div>
+        <div class="ding-jia-xiang">
+          <div class="ding-jia-xiang-tou">
+            <span class="ding-jia-ming-cheng">速通 Pro</span
+            ><span class="biao-qian">新用户限时优惠</span>
+          </div>
+          <div class="jia-ge">
+            <span class="qian-zhui">低至</span><span class="shu-zi">¥59</span
+            ><span class="mei-yue">/月</span>
+          </div>
+          <div class="gong-neng">
+            <div class="gong-neng-xiang">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+              >
+                <path d="M20 6L9 17l-5-5" /></svg
+              >每月 100 次包级别速通次数
+            </div>
+            <div class="gong-neng-xiang">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+              >
+                <path d="M20 6L9 17l-5-5" /></svg
+              >支持 10 个云端任务同时并行
+            </div>
+          </div>
+          <a href="#" class="ding-jia-an-niu">立即升级</a>
+        </div>
+        <div class="ding-jia-xiang">
+          <div class="ding-jia-xiang-tou">
+            <span class="ding-jia-ming-cheng">速通 Pro+</span>
+          </div>
+          <div class="jia-ge">
+            <span class="shu-zi">¥239</span><span class="mei-yue">/月</span>
+          </div>
+          <div class="gong-neng">
+            <div class="gong-neng-xiang">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+              >
+                <path d="M20 6L9 17l-5-5" /></svg
+              >每月 300 次包级别速通次数
+            </div>
+            <div class="gong-neng-xiang">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+              >
+                <path d="M20 6L9 17l-5-5" /></svg
+              >支持 10 个云端任务同时并行
+            </div>
+          </div>
+          <a href="#" class="ding-jia-an-niu">立即升级</a>
+        </div>
+        <div class="ding-jia-xiang">
+          <div class="ding-jia-xiang-tou">
+            <span class="ding-jia-ming-cheng">速通 Ultra</span>
+          </div>
+          <div class="jia-ge">
+            <span class="shu-zi">¥699</span><span class="mei-yue">/月</span>
+          </div>
+          <div class="gong-neng">
+            <div class="gong-neng-xiang">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+              >
+                <path d="M20 6L9 17l-5-5" /></svg
+              >每月 1000 次包级别速通次数
+            </div>
+            <div class="gong-neng-xiang">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+              >
+                <path d="M20 6L9 17l-5-5" /></svg
+              >支持 20 个云端任务同时并行
+            </div>
+            <div class="gong-neng-xiang">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+              >
+                <path d="M20 6L9 17l-5-5" /></svg
+              >优先解锁 SOTA 模型
+            </div>
+          </div>
+          <a href="#" class="ding-jia-an-niu">立即升级</a>
+        </div>
+      </div>
+      <div class="ding-jia-kuan">
+        <div class="zuo">
+          <div class="ding-jia-xiang-tou" style="margin: 0">
+            <span class="ding-jia-ming-cheng">优速通 Express</span
+            ><span class="biao-qian hui">限量发售</span>
+          </div>
+          <div class="jia-ge">
+            <span class="qian-zhui">低至</span><span class="shu-zi">¥1399</span
+            ><span class="mei-yue">/月</span><span class="yuan-jia">¥1999</span>
+          </div>
+        </div>
+        <div class="gong-neng">
+          <div class="gong-neng-xiang">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+            >
+              <path d="M20 6L9 17l-5-5" /></svg
+            >有效期内无限次包级别速通次数
+          </div>
+          <div class="gong-neng-xiang">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+            >
+              <path d="M20 6L9 17l-5-5" /></svg
+            >支持 20 个云端任务同时并行
+          </div>
+          <div class="gong-neng-xiang">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+            >
+              <path d="M20 6L9 17l-5-5" /></svg
+            >优先解锁 SOTA 模型
+          </div>
+        </div>
+        <a href="#" class="ding-jia-an-niu">立即升级</a>
+      </div>
+    </div>
+  </body>
+</html>

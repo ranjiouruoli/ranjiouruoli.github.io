@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRAE 官网首页</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Microsoft Yahei", sans-serif;
+      }
+
+      body {
+        background-color: #000;
+        color: #fff;
+        min-height: 100vh;
+        overflow-x: hidden;
+        padding-top: 54px;
+      }
+
+      .dao-hang {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 54px;
+        padding: 0 22px;
+        background: rgba(7, 8, 8, 0.72);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .dao-hang-zuo {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+      }
+
+      .logo {
+        font-weight: 800;
+        font-size: 18px;
+        letter-spacing: 1px;
+        padding: 2px 7px;
+        border-radius: 4px;
+        line-height: 1;
+        color: #f5f5f5;
+        text-decoration: none;
+        border: none;
+      }
+
+      .cai-dan {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        list-style: none;
+      }
+
+      .cai-dan a,
+      .cai-dan-xiang {
+        color: #f5f5f5;
+        font-size: 13.5px;
+        text-decoration: none;
+        cursor: pointer;
+        opacity: 0.9;
+        white-space: nowrap;
+      }
+
+      .cai-dan a:hover,
+      .cai-dan-xiang:hover {
+        opacity: 1;
+      }
+
+      .cai-dan-xiang {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .xia-la-jian-tou {
+        display: none;
+      }
+
+      .dao-hang-you {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .deng-lu {
+        color: #f5f5f5;
+        font-size: 13.5px;
+        text-decoration: none;
+        opacity: 0.9;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      .an-niu-lv {
+        background: #16d672;
+        color: #06210f;
+        font-size: 13.5px;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 7px 16px;
+        border-radius: 7px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        border: none;
+        transition: filter 0.15s;
+      }
+
+      .an-niu-lv:hover {
+        filter: brightness(1.08);
+      }
+
+      .xia-la-cai-dan {
+        position: absolute;
+        top: 30px;
+        left: -12px;
+        width: 248px;
+        background: #141414;
+        border: 1px solid #2a2a2a;
+        border-radius: 12px;
+        padding: 8px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-6px);
+        transition: 0.18s ease;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+      }
+
+      .cai-dan-xiang:hover .xia-la-cai-dan {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .xia-la-xiang {
+        display: flex;
+        gap: 11px;
+        padding: 9px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .xia-la-xiang:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .xia-la-tu-biao {
+        flex: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        background: #222;
+        border: 1px solid #313131;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #cfcfcf;
+      }
+
+      .xia-la-wen-zi {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+
+      .xia-la-biao-ti {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #f5f5f5;
+      }
+
+      .xin-biao-qian {
+        font-size: 9px;
+        font-weight: 700;
+        color: #16d672;
+        border: 1px solid rgba(22, 214, 114, 0.5);
+        border-radius: 4px;
+        padding: 1px 4px;
+        letter-spacing: 0.5px;
+      }
+
+      .xia-la-fu-biao-ti {
+        font-size: 11.5px;
+        color: #8a8f8b;
+      }
+
+      .shouping {
+        position: relative;
+        min-height: calc(100vh - 80px);
+        padding: 0 40px;
+        background: url("背景.png") no-repeat center center / cover;
+      }
+
+      .neirong {
+        background-color: #000;
+        padding: 80px 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .shoupingbiaoti {
+        position: absolute;
+        left: 40px;
+        bottom: 80px;
+      }
+
+      .shoupingbiaoti h1 {
+        font-size: 72px;
+        font-weight: bold;
+        line-height: 1.2;
+        margin-bottom: 10px;
+      }
+
+      .shoupingbiaoti p {
+        font-size: 36px;
+        color: #ccc;
+        line-height: 1.4;
+      }
+
+      .shoupingright {
+        position: absolute;
+        right: 40px;
+        bottom: 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 20px;
+      }
+
+      .miaoshu {
+        text-align: right;
+        font-size: 14px;
+        color: #ccc;
+        line-height: 1.6;
+      }
+
+      .anniurow {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+      }
+
+      .xiazai {
+        padding: 16px 48px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        min-width: 220px;
+      }
+
+      .xiazaiwork {
+        background-color: #00e08f;
+        color: #000;
+      }
+
+      .xiazaiwork:hover {
+        background-color: #00c47a;
+        transform: translateY(-2px);
+      }
+
+      .xiazaiide {
+        background-color: transparent;
+        color: #fff;
+        border: 1px solid #666;
+      }
+
+      .xiazaiide:hover {
+        border-color: #00e08f;
+        background-color: rgba(0, 224, 143, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .wangyeban {
+        font-size: 14px;
+        color: #999;
+        cursor: pointer;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .wangyeban:hover {
+        color: #00e08f;
+      }
+
+      .dabiaoti {
+        margin-bottom: 20px;
+      }
+
+      .baise {
+        color: #fff;
+        font-size: 64px;
+        font-weight: bold;
+      }
+
+      .jianbian {
+        font-size: 64px;
+        font-weight: bold;
+        background: linear-gradient(90deg, #00e08f 0%, #fff 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .xiaobiaoti {
+        color: #888;
+        font-size: 20px;
+        margin-bottom: 40px;
+      }
+
+      .tansuo {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 60px;
+        cursor: pointer;
+      }
+
+      .shipinbox {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      .shipinbox video {
+        width: 100%;
+        height: auto;
+        display: block;
+        cursor: pointer;
+      }
+
+      @media (max-width: 1000px) {
+        .shoupingbiaoti h1 {
+          font-size: 48px;
+        }
+        .shoupingbiaoti p {
+          font-size: 24px;
+        }
+        .xiazai {
+          padding: 12px 32px;
+          min-width: 180px;
+        }
+        .baise,
+        .jianbian {
+          font-size: 40px;
+        }
+        .xiaobiaoti {
+          font-size: 16px;
+        }
+      }
+
+      @media (max-width: 800px) {
+        .shoupingright {
+          bottom: 30px;
+        }
+        .shoupingbiaoti {
+          bottom: 200px;
+        }
+        .anniurow {
+          flex-direction: column;
+          align-items: flex-end;
+        }
+        .baise,
+        .jianbian {
+          font-size: 28px;
+        }
+        .cai-dan {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="dao-hang">
+      <div class="dao-hang-zuo">
+        <a href="#" class="logo">TRAE</a>
+        <ul class="cai-dan">
+          <li class="cai-dan-xiang">
+            产品 <span class="xia-la-jian-tou">▾</span>
+            <div class="xia-la-cai-dan">
+              <a
+                href="TRAEWork.html"
+                class="xia-la-xiang"
+                style="text-decoration: none"
+              >
+                <div class="xia-la-tu-biao">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect x="3" y="4" width="18" height="14" rx="2" />
+                    <path d="M8 20h8" />
+                  </svg>
+                </div>
+                <div class="xia-la-wen-zi">
+                  <div class="xia-la-biao-ti">
+                    TRAE Work <span class="xin-biao-qian">NEW</span>
+                  </div>
+                  <div class="xia-la-fu-biao-ti">AI 工作助手</div>
+                </div>
+              </a>
+              <a href="#" class="xia-la-xiang" style="text-decoration: none">
+                <div class="xia-la-tu-biao">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13 6l-2 12" />
+                  </svg>
+                </div>
+                <div class="xia-la-wen-zi">
+                  <div class="xia-la-biao-ti">TRAE IDE</div>
+                  <div class="xia-la-fu-biao-ti">AI 原生 IDE</div>
+                </div>
+              </a>
+              <a href="#" class="xia-la-xiang" style="text-decoration: none">
+                <div class="xia-la-tu-biao">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M11 4H6a2 2 0 00-2 2v5m0 4v3a2 2 0 002 2h12a2 2 0 002-2v-7"
+                    />
+                    <rect x="13" y="2" width="8" height="8" rx="1.5" />
+                  </svg>
+                </div>
+                <div class="xia-la-wen-zi">
+                  <div class="xia-la-biao-ti">TRAE 企业版</div>
+                  <div class="xia-la-fu-biao-ti">企业级 AI 解决方案</div>
+                </div>
+              </a>
+            </div>
+          </li>
+          <li><a href="#">企业版</a></li>
+          <li><a href="定价.html">定价</a></li>
+          <li><a href="#">文档</a></li>
+          <li><a href="更新日志.html">更新日志</a></li>
+          <li><a href="#">社区</a></li>
+          <li><a href="#">知识库</a></li>
+        </ul>
+      </div>
+      <div class="dao-hang-you">
+        <a href="#" class="deng-lu">登录</a>
+        <a href="#" class="an-niu-lv">下载中心</a>
+      </div>
+    </header>
+
+    <section class="shouping">
+      <div class="shoupingbiaoti">
+        <h1>TRAE</h1>
+        <p>智能无限，协作无间</p>
+      </div>
+      <div class="shoupingright">
+        <div class="miaoshu">
+          TRAE Work：全新上线的智能工作助手<br />
+          TRAE IDE：你的专属 AI 开发工程师
+        </div>
+        <div class="anniurow">
+          <button class="xiazai xiazaiwork">
+            <img src="win.png" width="16" height="16" alt="win" /> 下载 TRAE
+            Work
+          </button>
+          <button class="xiazai xiazaiide">
+            <img src="win.png" width="16" height="16" alt="win" /> 下载 TRAE IDE
+          </button>
+        </div>
+        <a href="TRAEWork.html" class="wangyeban">TRAE Work 网页版 &gt;</a>
+      </div>
+    </section>
+
+    <section class="neirong">
+      <div class="dabiaoti">
+        <span class="baise">全新 </span>
+        <span class="jianbian">TRAE Work</span>
+      </div>
+      <div class="xiaobiaoti">桌面端、网页版和移动端全量上线</div>
+      <img
+        src="即刻探索.png"
+        alt="即刻探索"
+        class="tansuo"
+        onclick="gundongBofang()"
+      />
+      <div class="shipinbox">
+        <video id="shipin" controls onclick="this.play()">
+          <source src="介绍.mp4" type="video/mp4" />
+          您的浏览器不支持视频播放。
+        </video>
+      </div>
+    </section>
+
+    <script>
+      function gundongBofang() {
+        document
+          .getElementById("shipin")
+          .scrollIntoView({ behavior: "smooth", block: "center" });
+        document.getElementById("shipin").play();
+      }
+    </script>
+  </body>
+</html>
